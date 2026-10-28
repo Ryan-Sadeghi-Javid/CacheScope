@@ -1,0 +1,10 @@
+# Analysis and tooling dependencies.
+#
+# The simulator itself has no third-party dependencies at all: it is C++17 plus
+# CMake, and its JSON parser is written from scratch. Everything below is for
+# the Python layer around it.
+
+pandas>=2.0          # sweep result handling, comparison tables
+matplotlib>=3.7      # analysis figures
+streamlit>=1.30      # dashboard/app.py
+mcp>=1.2.0           # mcp/ server

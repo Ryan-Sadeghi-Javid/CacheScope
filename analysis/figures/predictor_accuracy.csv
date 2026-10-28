@@ -1,0 +1,5 @@
+branch.predictor,accuracy_pct,branch.mpki,sim.cpi,branch.predictor_state_bits
+bimodal,72.9435,54.113,2.366526812,8192
+gshare,82.6765,34.647,2.074536812,8204
+tournament,83.6625,32.675,2.044956812,24588
+perceptron,87.209,25.582,1.938561812,51224

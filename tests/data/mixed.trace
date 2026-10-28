@@ -1,0 +1,8 @@
+# cachescope test fixture: comments and blank lines must be skipped
+l 0x1fffff50 4
+
+s 0x1fffff58 1
+r 1fffff60 8
+w 0X1FFFFF68 2
+   l 0x1fffff70 0
+l 0x1fffff78

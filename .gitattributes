@@ -1,0 +1,13 @@
+# Shell scripts and the workload table are consumed by bash inside WSL / Linux
+# CI. A CRLF line ending there is not cosmetic: bash reads the carriage return
+# as part of the last token on the line and the script fails with errors like
+# `$'\r': command not found`. Force LF regardless of the checkout platform.
+*.sh            text eol=lf
+*.tsv           text eol=lf
+*.yml           text eol=lf
+*.yaml          text eol=lf
+Makefile        text eol=lf
+bench/Makefile  text eol=lf
+
+# Traces are large and line-oriented; keep them from being renormalised.
+*.trace         text eol=lf

@@ -1,0 +1,22 @@
+# Single source of truth for the validation workloads.
+#
+# Both scripts/capture_valgrind.sh (which produces the simulated traces) and
+# scripts/run_perf.sh (which measures the same code on real hardware) read this
+# file. Keeping one list is not tidiness: a simulated-versus-measured table is
+# meaningless if the two sides ran different problem sizes.
+#
+# Columns, tab-separated:
+#   name              label used in every report
+#   binary            executable in bench/
+#   args              arguments, space separated
+#   trace_skip        leading data references to discard when tracing (start-up)
+#
+# Footprints for stream and pointer_chase exceed the 2 MiB LLC in
+# configs/baseline.json so that DRAM behaviour is exercised on both sides.
+name	binary	args	trace_skip
+stream	stream	8192 1	40000
+pointer_chase	pointer_chase	8192 500000	40000
+matmul_naive	matmul	128 32 1	40000
+matmul_tiled	matmul	128 32 2	40000
+branchy_shuffled	branchy	400000 0	40000
+branchy_sorted	branchy	400000 1	40000

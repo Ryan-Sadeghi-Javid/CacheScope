@@ -1,0 +1,67 @@
+{
+  "name": "prefetch-nextline",
+  "levels": [
+    {
+      "name": "l1d",
+      "size_kb": 32,
+      "assoc": 8,
+      "block_size": 64,
+      "hit_latency": 4,
+      "write_policy": "write-back",
+      "alloc_policy": "write-allocate",
+      "replacement": "lru",
+      "prefetcher": {
+        "kind": "next-line",
+        "degree": 1,
+        "distance": 1,
+        "on_miss_only": true
+      }
+    },
+    {
+      "name": "l2",
+      "size_kb": 256,
+      "assoc": 8,
+      "block_size": 64,
+      "hit_latency": 12,
+      "write_policy": "write-back",
+      "alloc_policy": "write-allocate",
+      "replacement": "lru",
+      "prefetcher": {
+        "kind": "next-line",
+        "degree": 2,
+        "distance": 1,
+        "on_miss_only": true
+      }
+    },
+    {
+      "name": "llc",
+      "size_kb": 2048,
+      "assoc": 16,
+      "block_size": 64,
+      "hit_latency": 36,
+      "write_policy": "write-back",
+      "alloc_policy": "write-allocate",
+      "replacement": "lru"
+    }
+  ],
+  "dram": {
+    "latency_cycles": 200,
+    "bytes_per_cycle": 8.0,
+    "queue_capacity": 64
+  },
+  "timing": {
+    "base_cpi": 1.0,
+    "instructions_per_access": 3.0,
+    "branch_mispredict_penalty": 15,
+    "mlp_overlap": 0.0
+  },
+  "branch": {
+    "predictor": "gshare",
+    "pc_index_bits": 12,
+    "history_bits": 12,
+    "chooser_index_bits": 12,
+    "perceptron_index_bits": 8,
+    "perceptron_history": 24,
+    "density": 0.2
+  }
+}

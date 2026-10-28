@@ -1,0 +1,52 @@
+# Build trees
+build/
+build-*/
+cmake-build-*/
+_deps/
+*.o
+*.obj
+*.a
+*.lib
+*.exe
+*.pdb
+compile_commands.json
+
+# Benchmark binaries (built by bench/Makefile)
+bench/stream
+bench/pointer_chase
+bench/matmul
+bench/branchy
+
+# Fetched traces. gcc.trace and swim.trace come from an unlicensed upstream
+# repository and are deliberately not committed here; scripts/fetch_traces.sh
+# downloads them on demand. Captured Valgrind traces are regenerable and large.
+traces/upstream/
+traces/bench/
+*.trace.gz
+
+# Generated telemetry and raw perf output. The curated figures and the
+# committed CSVs under analysis/ are intentionally tracked, since the README
+# cites them.
+analysis/telemetry_*.csv
+analysis/telemetry_*.jsonl
+*.perf.data
+perf.data*
+throughput.txt
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Generated branch traces, except the sample the README cites.
+traces/branch/*.trace
+!traces/branch/sample.trace
