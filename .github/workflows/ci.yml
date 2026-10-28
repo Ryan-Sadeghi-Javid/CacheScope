@@ -42,14 +42,20 @@ jobs:
 
       - name: Configure
         shell: bash
-        env:
-          CC: ${{ matrix.cc }}
-          CXX: ${{ matrix.cxx }}
         run: |
+          # Pass a compiler override only when the matrix row supplies one.
+          # Using `env: CXX: ${{ matrix.cxx }}` instead would set CXX to the
+          # empty string for the MSVC and AppleClang rows, and CMake then
+          # searches for a compiler literally named "" and fails at project().
+          extra=()
+          if [ -n "${{ matrix.cxx }}" ]; then
+            extra+=("-DCMAKE_CXX_COMPILER=${{ matrix.cxx }}")
+          fi
           cmake -S . -B build \
             -DCMAKE_BUILD_TYPE=Release \
             -DCACHESCOPE_BUILD_TESTS=ON \
-            -DCACHESCOPE_WERROR=ON
+            -DCACHESCOPE_WERROR=ON \
+            "${extra[@]}"
 
       - name: Build
         run: cmake --build build --config Release --parallel

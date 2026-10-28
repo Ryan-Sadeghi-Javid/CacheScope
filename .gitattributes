@@ -11,3 +11,10 @@ bench/Makefile  text eol=lf
 
 # Traces are large and line-oriented; keep them from being renormalised.
 *.trace         text eol=lf
+
+# ...except the test fixtures, which must survive byte-for-byte. The rule above
+# would strip the carriage returns out of tests/data/crlf.trace -- the fixture
+# whose entire purpose is to prove the parser handles CRLF -- and the byte-count
+# assertion in test_trace.cpp would then fail on any fresh checkout. Fixtures
+# are inputs under test, not source files to be tidied.
+tests/data/**   -text

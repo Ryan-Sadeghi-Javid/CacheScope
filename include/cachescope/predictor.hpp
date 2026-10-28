@@ -110,7 +110,9 @@ class TournamentPredictor : public BranchPredictor {
 
   BimodalPredictor local_;
   GsharePredictor global_;
-  std::uint32_t chooser_bits_;
+  // The chooser's width lives in chooser_mask_ and chooser_.size(); storing the
+  // bit count separately as well would be a field that is written and never
+  // read, which clang rejects under -Wunused-private-field.
   Addr chooser_mask_;
   std::vector<std::uint8_t> chooser_;
   // Carried between predict() and update() for the branch in flight.

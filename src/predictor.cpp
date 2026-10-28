@@ -53,7 +53,6 @@ TournamentPredictor::TournamentPredictor(std::uint32_t index_bits, std::uint32_t
                                          std::uint32_t chooser_bits)
     : local_(index_bits),
       global_(index_bits, history_bits),
-      chooser_bits_(chooser_bits),
       chooser_mask_((Addr{1} << chooser_bits) - 1),
       chooser_(std::size_t{1} << chooser_bits, kWeaklyTaken) {}
 
