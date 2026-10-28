@@ -380,6 +380,13 @@ def main() -> int:
         print("error: give at least one input CSV", file=sys.stderr)
         return 2
 
+    # Create the output directory up front. Each figure writes its companion
+    # CSV before rendering, so relying on save() to mkdir leaves the very first
+    # to_csv() call writing into a directory that does not exist yet. That only
+    # shows up on a clean machine, where the directory has not been left behind
+    # by an earlier run.
+    args.outdir.mkdir(parents=True, exist_ok=True)
+
     written: list[Path] = []
     for name, path, fn in jobs:
         if path is None:
